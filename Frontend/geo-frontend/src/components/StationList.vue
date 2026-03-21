@@ -2,7 +2,7 @@
   <div>
     <h2>Stations</h2>
     <ul>
-      <li v-for="station in stations" :key="station.uniqueId">
+      <li v-for="station in stations" :key="station.name">
         {{ station.name }} - {{ station.type }}
       </li>
     </ul>
