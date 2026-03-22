@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-4">
     <header class="mb-4 text-center">
-      <h1>Pollution Track Platform</h1>
+      <h1 class="hero-title">Pollution Track Platform</h1>
     </header>
 
     <div class="row">
@@ -34,3 +34,22 @@ import StationForm from './components/StationForm.vue'
 import StationList from './components/StationList.vue'
 import StationMap from './components/StationMap.vue'
 </script>
+
+<style>
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #9aa78d, #84ea8e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  margin: 0 0 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.2s ease;
+}
+
+.hero-title:hover {
+  transform: scale(1.05);
+}
+</style>
