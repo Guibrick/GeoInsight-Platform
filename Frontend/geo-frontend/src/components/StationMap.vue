@@ -1,52 +1,48 @@
 <template>
   <div>
-    <h2>Mapa de estaciones</h2>
+    <h2>Stations Map</h2>
     <div id="map" style="height: 400px;"></div>
 
-    <div v-if="loading">Cargando estaciones...</div>
+    <div v-if="loading">Loading stations...</div>
     <div v-if="error">{{ error }}</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import * as L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import axios from 'axios'
-import type { Station } from '../types/station'
+import { useStationStore } from '../store/stationStore'
+import { storeToRefs } from 'pinia'
 
-// estado
-const loading = ref(false)
-const error = ref<string | null>(null)
+const store = useStationStore()
+const { stations, loading, error } = storeToRefs(store)
 
-onMounted(async () => {
-  const map = L.map('map').setView([45.4642, 9.1900], 6)
+const map = ref<L.Map>()
+
+onMounted(() => {
+  map.value = L.map('map').setView([45.4642, 9.1900], 6)
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-  }).addTo(map)
+  }).addTo(map.value)
 
-  loading.value = true
+  store.fetchStations()
+})
 
-  try {
-    const res = await axios.get<Station[]>('/stations')
-    const stations = res.data
+watchEffect(() => {
+  if (!map.value) return
 
-    console.log('Stations:', stations)
+  map.value.eachLayer((layer) => {
+    if ((layer as any)._popup) map.value?.removeLayer(layer)
+  })
 
-    stations.forEach((station) => {
-      if (station.latitude && station.longitude) {
-        L.marker([station.latitude, station.longitude])
-          .addTo(map)
-          .bindPopup(`${station.name} - ${station.type}`)
-      }
-    })
-
-  } catch (err: any) {
-    console.error(err)
-    error.value = 'Error cargando estaciones'
-  } finally {
-    loading.value = false
-  }
+  stations.value.forEach((station) => {
+    if (station.latitude && station.longitude) {
+      L.marker([station.latitude, station.longitude])
+        .addTo(map.value!)
+        .bindPopup(`${station.name} - ${station.type}`)
+    }
+  })
 })
 </script>

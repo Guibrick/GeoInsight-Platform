@@ -14,8 +14,10 @@ import { ref } from 'vue'
 import { createStation } from '../api/stations'
 import type { Station } from '../types/station'
 import { useStationStore } from '../store/stationStore'
+import { storeToRefs } from 'pinia'
 
 const store = useStationStore()
+const { stations } = storeToRefs(store)
 
 const name = ref('')
 const latitude = ref(0)
@@ -31,10 +33,12 @@ const submitStation = async () => {
     type: type.value,
     value: value.value
   }
+
   await createStation(newStation)
+
   name.value = type.value = ''
   latitude.value = longitude.value = value.value = 0
-  alert('Station created!')
+  
   await store.fetchStations()
 }
 </script>
