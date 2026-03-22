@@ -2,7 +2,7 @@
   <form @submit.prevent="submitStation">
     <input 
       v-model="name" 
-      placeholder="Name" 
+      placeholder="City Name" 
       required 
       class="form-control mb-2" 
     />
@@ -12,7 +12,7 @@
       required 
       class="form-select mb-2"
     >
-      <option value="" disabled>Select Station Type</option>
+      <option value="" disabled>Pollution Type</option>
       <option v-for="option in stationTypes" :key="option" :value="option">
         {{ option }}
       </option>

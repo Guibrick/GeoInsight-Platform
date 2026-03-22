@@ -1,15 +1,29 @@
 <template>
-  <div class="d-flex flex-column" style="height: 100%;">
-    <h2 class="mb-3">Stations</h2>
-
+  <div class="d-flex flex-column" style="height: 90%;">
     <ul class="list-group flex-grow-1 overflow-auto">
       <li 
         v-for="station in stations" 
         :key="station.name" 
         class="list-group-item d-flex justify-content-between align-items-center"
       >
-        {{ station.name }}
-        <span class="badge bg-primary rounded-pill">{{ station.type }}</span>
+        <span class="fw-bold">{{ station.name }}</span>
+
+        <div class="d-flex gap-2">
+          <span 
+            class="badge" 
+            :class="{
+              'bg-primary': station.type === 'AIR',
+              'bg-success': station.type === 'WATER',
+              'bg-warning text-dark': station.type === 'NOISE'
+            }"
+          >
+            {{ station.type }}
+          </span>
+
+          <span class="badge" :class="valueClass(station.value)">
+            {{ station.value }}
+          </span>
+        </div>
       </li>
     </ul>
 
@@ -25,6 +39,12 @@ import { storeToRefs } from 'pinia'
 
 const store = useStationStore()
 const { stations, loading, error } = storeToRefs(store)
+
+const valueClass = (val: number) => {
+  if (val < 4) return 'bg-success'
+  if (val < 7) return 'bg-warning text-dark'
+  return 'bg-danger'
+}
 
 onMounted(async () => {
   await store.fetchStations()
