@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="map" style="height: 400px;"></div>
+    <div id="map" style="height: 700px;"></div>
 
     <div v-if="loading">Loading stations...</div>
     <div v-if="error">{{ error }}</div>

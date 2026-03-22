@@ -5,23 +5,23 @@
     </header>
 
     <div class="row">
-      <div class="col-lg-4 mb-4">
+      <div class="col-lg-4 mb-4 d-flex flex-column">
         <div class="card mb-3 p-3 shadow-sm">
           <h4 class="card-title">Add Station</h4>
           <StationForm />
         </div>
 
-        <div class="card p-3 shadow-sm">
-          <h4 class="card-title">Stations</h4>
+        <div class="card p-3 shadow-sm" style="height: 500px;">
           <StationList />
         </div>
       </div>
 
       <div class="col-lg-8">
-        <div class="card shadow-sm p-3" style="height: 100%;">
-            <div class="card shadow rounded" style="height: 500px;">
-              <StationMap />
-            </div>
+        <div class="card shadow-sm p-3">
+          <h4 class="card-title mb-3">Map</h4>
+          <div style="height: 700px;">
+            <StationMap />
+          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,41 @@
 <template>
   <form @submit.prevent="submitStation">
-    <input v-model="name" placeholder="Name" required class="form-control mb-2" />
-    <input v-model="type" placeholder="Type" required class="form-control mb-2" />
-    <input v-model="value" placeholder="Value" required class="form-control mb-3" />
+    <input 
+      v-model="name" 
+      placeholder="Name" 
+      required 
+      class="form-control mb-2" 
+    />
+
+    <select 
+      v-model="type" 
+      required 
+      class="form-select mb-2"
+    >
+      <option value="" disabled>Select Station Type</option>
+      <option v-for="option in stationTypes" :key="option" :value="option">
+        {{ option }}
+      </option>
+    </select>
+
+<div class="mb-3">
+  <label for="valueSlider" class="form-label">Value: {{ value }}</label>
+  <input
+    type="range"
+    v-model.number="value"
+    min="0"
+    max="10"
+    step="0.5"
+    class="form-range custom-slider"
+  />
+
+  <div class="d-flex justify-content-between mt-1">
+    <span>0</span>
+    <span>5</span>
+    <span>10</span>
+  </div>
+</div>
+
     <button type="submit" class="btn btn-primary w-100">Create Station</button>
   </form>
 </template>
@@ -22,6 +55,8 @@ const latitude = ref(0)
 const longitude = ref(0)
 const type = ref('')
 const value = ref(0)
+
+const stationTypes = ['AIR', 'WATER', 'NOISE']
 
 const fetchCoordinates = async (city: string) => {
   if (!city) return { lat: 0, lon: 0 }
