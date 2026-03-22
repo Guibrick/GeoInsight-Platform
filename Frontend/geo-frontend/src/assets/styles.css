@@ -10,3 +10,39 @@ h1, h4 {
 .card {
   background-color: #ffffff;
 }
+
+.badge-air {
+  background-color: #FFA07A;
+  color: #333;
+}
+
+.badge-water {
+  background-color: #87CEFA;
+  color: #333;
+}
+
+.badge-noise {
+  background-color: #D8BFD8;
+  color: #333;
+}
+
+.badge-value-low {
+  background-color: #A8E6CF;
+  color: #333;
+}
+
+.badge-value-medium {
+  background-color: #FFD3B6;
+  color: #333;
+}
+
+.badge-value-high {
+  background-color: #FF8B94;
+  color: #333;
+}
+
+.badge {
+  border-radius: 0.75rem;
+  font-weight: 500;
+  padding: 0.35em 0.75em;
+}
