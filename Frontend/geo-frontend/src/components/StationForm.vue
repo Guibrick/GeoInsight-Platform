@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="submitStation">
-    <input v-model="name" placeholder="Name" required />
-    <input v-model="type" placeholder="Type" required />
-    <input v-model="value" placeholder="Value" required />
-    <button type="submit">Create Station</button>
+    <input v-model="name" placeholder="Name" required class="form-control mb-2" />
+    <input v-model="type" placeholder="Type" required class="form-control mb-2" />
+    <input v-model="value" placeholder="Value" required class="form-control mb-3" />
+    <button type="submit" class="btn btn-primary w-100">Create Station</button>
   </form>
 </template>
 

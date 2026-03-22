@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Stations Map</h2>
     <div id="map" style="height: 400px;"></div>
 
     <div v-if="loading">Loading stations...</div>
